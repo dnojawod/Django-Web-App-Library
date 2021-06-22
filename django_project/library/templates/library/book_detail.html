@@ -1,0 +1,14 @@
+{% extends "library/base.html" %}
+{% block title %} Books {% endblock %}
+{% block content %}
+
+        <h3>Title: {{ object.title }}</h3>
+        <h4>Author: {{ object.author }}</h4>
+        Book ID: {{ object.id }}<br>
+        Description: {{ object.description }}<br><br>
+<div>
+    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'update_book' object.id %}">Update</a>
+    <a class="btn btn-danger btn-sm mt-1 mb-1"href="{% url 'delete_book' object.id %}">Delete</a>
+</div>
+
+{% endblock content %}

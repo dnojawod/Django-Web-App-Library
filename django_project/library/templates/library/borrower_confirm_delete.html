@@ -1,0 +1,18 @@
+{% extends "library/base.html" %}
+{% load crispy_forms_tags %}
+{% block title %} Borrow {% endblock %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Delete Borrow data</legend>
+                <h2>Are you sure you want to delete the borrow data "{{ object.customer }} - {{ object.book }}?"</h2>
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-danger" type="submit">Delete</button>
+                <a class="btn btn-outline-secondary" href="{% url 'detail_borrower' object.id %}">Cancel</a>
+            </div>
+        </form>
+    </div>
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% extends "library/base.html" %}
+{% block title %} Customers {% endblock %}
+{% block content %}
+
+        <h4>Name: {{ object.first_name }} {{ object.last_name }}</h4>
+        Customer ID: {{ object.id }}<br>
+        Address: {{ object.address }}<br><br>
+<div>
+    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'update_customer' object.id %}">Update</a>
+    <a class="btn btn-danger btn-sm mt-1 mb-1"href="{% url 'delete_customer' object.id %}">Delete</a>
+</div><br>
+<h2>Borrowed Books</h2>
+{% for entry in object.borrower_set.all %}
+        Book: {{ entry.book }}<br>
+        Issue date: {{ entry.issue_date }}<br>
+        Return date: {{ entry.return_date }}<br><br><hr>
+{% endfor %}
+{% endblock content %}

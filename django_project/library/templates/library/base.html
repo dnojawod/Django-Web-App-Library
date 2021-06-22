@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <title>Library - {% block title %} {% endblock %}</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <span class="navbar-brand mb-0 h1">Library</span>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      {% if user.is_authenticated %}
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkBook" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Books
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkBook">
+          <a class="dropdown-item" href="{% url 'create_book' %}">Create Book</a>
+          <a class="dropdown-item" href="{% url 'display_book' %}">Display Books</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkCustomer" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Customers
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkCustomer">
+          <a class="dropdown-item" href="{% url 'create_customer' %}">Create Customer</a>
+          <a class="dropdown-item" href="{% url 'display_customer' %}">Display Customers</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLinkBorrow" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Borrow
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLinkBorrow">
+          <a class="dropdown-item" href="{% url 'create_borrower' %}">Borrow Book</a>
+          <a class="dropdown-item" href="{% url 'display_borrower'%}?returned=False">Status</a>
+        </div>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+      </li>
+    </ul>
+{% endif %}
+  </div>
+</nav>
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-8">
+                {% if messages %}
+                    {% for message in messages %}
+                         <div class="alert alert-{{message.tags}}">
+                             {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

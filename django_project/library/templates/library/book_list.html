@@ -1,0 +1,20 @@
+{% extends "library/base.html" %}
+{% block title %} Books {% endblock %}
+{% block content %}
+<legend class="border-bottom mb-4">Books</legend>
+<form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" name="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form><br>
+{% for entry in object_list %}
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+                <a href="{% url 'detail_book' entry.id %}">{{ entry.id }}<br>
+                {{ entry.title }}<br>
+                {{ entry.author }}<br></a><hr>
+            </div>
+        </div>
+    </article>
+{% endfor %}
+{% endblock content %}
